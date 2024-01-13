@@ -1,11 +1,13 @@
 mod utils;
 
+use rand::Rng;
 use wasm_bindgen::prelude::*;
 extern crate js_sys;
 extern crate fixedbitset;
 use fixedbitset::FixedBitSet;
 
 extern crate web_sys;
+use web_sys::console;
 
 // A macro to provide `println!(..)`-style syntax for `console.log` logging.
 macro_rules! log {
@@ -26,11 +28,28 @@ pub struct Universe {
 #[wasm_bindgen]
 impl Universe {
     pub fn new() -> Universe {
-        utils::set_panic_hook(); // For debugging
-        // let width = 64;
-        // let height = 32;
-        let width = 20;
-        let height = 10;
+        // utils::set_panic_hook(); // For debugging
+        let width = 64;
+        let height = 32;
+        let speed = 5;
+        let tick = 0;
+        let universe_size = (width * height) as usize;
+
+        let mut cells = FixedBitSet::with_capacity(universe_size);
+        for i in 0..universe_size {
+            cells.set(i, false);
+        }
+
+        Universe {
+            width,
+            height,
+            cells,
+            speed,
+            tick
+        }
+    }
+
+    pub fn new_with_parameters(width: u32, height: u32) -> Universe {
         let speed = 5;
         let tick = 0;
         let universe_size = (width * height) as usize;
@@ -54,6 +73,18 @@ impl Universe {
         self.cells = FixedBitSet::with_capacity(size);
         for i in 0..size {
             self.cells.set(i, false)
+        }
+    }
+
+    pub fn set_random_cells(&mut self) {
+        let size = (self.width * self.height) as usize;
+        self.cells = FixedBitSet::with_capacity(size);
+        for i in 0..size {
+            if rand::thread_rng().gen::<f64>() < 0.25 {
+                self.cells.set(i, true)
+            } else {
+                self.cells.set(i, false)
+            }
         }
     }
 
@@ -98,6 +129,7 @@ impl Universe {
     }
 
     pub fn tick(&mut self) {
+        // let _timer = Timer::new("Universe::tick");
         if self.tick % self.speed == 0 {
             let mut next = self.cells.clone();
 
@@ -106,9 +138,6 @@ impl Universe {
                     let idx = self.get_index(row, col);
                     let cell = self.cells[idx];
                     let live_neighbors = self.live_neighbor_count(row, col);
-
-                    log!("cell[{}, {}] is initially {:?} and has {} live neighbors",
-                        row, col, cell,live_neighbors);
 
                     next.set(idx, match (cell, live_neighbors) {
                         // Rule 1: Any live cell with fewer than two live neighbours
@@ -183,16 +212,21 @@ impl Universe {
     }
 }
 
-// impl fmt::Display for Universe {
-//     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-//         for line in self.cells.as_slice().chunks(self.width as usize) {
-//             for &cell in line {
-//                 let symbol = if cell == Cell::Dead { '◻' } else { '◼' };
-//                 write!(f, "{}", symbol)?;
-//             }
-//             write!(f, "\n")?;
-//         }
-//
-//         Ok(())
-//     }
-// }
+
+// Helpers to measure performance
+pub struct Timer<'a> {
+    name: &'a str,
+}
+
+impl<'a> Timer<'a> {
+    pub fn new(name: &'a str) -> Timer<'a> {
+        console::time_with_label(name);
+        Timer { name }
+    }
+}
+
+impl<'a> Drop for Timer<'a> {
+    fn drop(&mut self) {
+        console::time_end_with_label(self.name);
+    }
+}

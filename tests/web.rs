@@ -41,13 +41,4 @@ pub fn test_tick() {
     input_universe.tick();
 
     assert!(input_universe.get_cells_ref().eq(expected_universe.get_cells_ref()));
-
-    // assert!(input_universe.cells().clone().intersect_with(expected_universe.cells().clone()));
-    // assert_eq!(input_universe.cells().clone(), ));
-    // assert!(input_universe.cells()== expected_universe.cells());
-    // for row in 0..input_universe.height() {
-    //     for col in 0..input_universe.width() {
-    //         assert!(input_universe == expected_universe);
-        // }
-    // }
 }
