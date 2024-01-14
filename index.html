@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Game of Life</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+<noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
+
+<div class="container-fluid" id="main">
+    <h1 id="title">Game of Life</h1>
+    <div id="fps"></div>
+    <div class="row" id="main-row">
+        <div class="col-xs-12 col-lg-3" id="left-column">
+            <h4>Rules:</h4>
+            <div id="rules">
+                <h5> <b>1.</b> Any live cell with fewer than two live neighbours dies, as if by underpopulation.</h5>
+                <h5> <b>2.</b> Any live cell with two or three live neighbours lives on to the next generation.</h5>
+                <h5> <b>3.</b> Any live cell with more than three live neighbours dies, as if by overpopulation.</h5>
+                <h5> <b>4.</b> Any dead cell with exactly three live neighbours becomes a live cell, as if by
+                    reproduction.</h5>
+
+                <p>Read more about
+                    <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target="_blank"
+                       rel="noopener noreferrer">Conway's game of life</a>
+                </p>
+            </div>
+            <div id="buttons">
+                <button id="play-pause"></button>
+                <button id="reset-button"></button>
+                <button id="random-button">Random</button>
+            </div>
+            <div id="speed-slider-div">
+                <input id="speed-slider" type="range" min="4" max="20" step="4">
+                <i class="fas fa-tachometer-alt"></i>
+                <i class="fas fa-tachometer"></i>
+                <i class="fas fa-tachometer-alt-slow"></i>
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-9" id="right-column">
+            <canvas id="game-of-life-canvas"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-P6f1A8U+YaaUZa5e92/oatldfYW6nEyJ/D04+s6oAkkAdB+gqYGBzjF78L/KPDE"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="./bootstrap.js"></script>
+</body>
+</html>

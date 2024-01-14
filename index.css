@@ -1,0 +1,73 @@
+body {
+    background-color: white;
+    font-family: Helvetica, serif;
+}
+
+#fps {
+    white-space: pre;
+    font-family: monospace;
+}
+
+#main {
+    width: 100%;
+    height: 100vh;
+    padding-top: 3%;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+#title {
+    color: #3273ff;
+}
+
+#main-row {
+}
+
+#left-column {
+}
+
+#rules {
+    margin-left: 10px;
+}
+
+#buttons {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+#play-pause {
+    width: 55px;
+}
+
+#reset-button {
+    margin-left: 10px;
+    width: 70px;
+}
+
+#clear-button {
+    margin-left: 10px;
+    width: 70px;
+}
+
+#left-column {
+    margin-bottom: 50px;
+}
+
+#speed-slider-div {
+    flex-direction: row;
+    display: flex;
+}
+
+#speed-slider {
+    width: 110px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+}
+
+#right-column {
+}
+
+#game-of-life-canvas {
+    width: 100%;
+    padding-bottom: 2%;
+}
