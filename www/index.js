@@ -74,12 +74,12 @@ playPauseButton.addEventListener("click", event => {
 
 
 const play = () => {
-    playPauseButton.textContent = "II";
+    playPauseButton.textContent = "Pause";
     renderLoop();
 }
 
 const pause = () => {
-    playPauseButton.textContent = "▶";
+    playPauseButton.textContent = "Play";
     cancelAnimationFrame(animationId);
     animationId = null;
 }
